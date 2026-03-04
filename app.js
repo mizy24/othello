@@ -179,8 +179,17 @@ passBtn.addEventListener('click', onPass)
 
 startBtn.addEventListener('click', startGame)
 
+// Initialize: draw empty board immediately
+console.log('[app.js] drawing initial empty board')
+buildBoard(Array.from({ length: 8 }, () => Array.from({ length: 8 }, () => 0)), [])
+
 // load initial blank
 const backendUrl = getBackendUrl()
-fetch(`${backendUrl}/state`).then(r => r.json()).then(renderState).catch(e => {
-  noteEl.textContent = '无法连接到后端: ' + e.message
-})
+console.log('[app.js] initialized, backend URL:', backendUrl)
+// try to load state, but don't fail if backend unavailable
+setTimeout(() => {
+  fetch(`${backendUrl}/state`).then(r => r.json()).then(renderState).catch(e => {
+    console.error('[app.js] failed to load initial state:', e)
+    noteEl.textContent = '无法连接到后端: ' + e.message
+  })
+}, 100)
