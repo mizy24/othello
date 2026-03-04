@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Othello 人机对战</title>
+    <link rel="stylesheet" href="/static/style.css">
+  </head>
+  <body>
+    <div class="container">
+      <h1>Othello 人机对战</h1>
+
+      <div class="backend-config">
+        <label>后端地址:
+          <input id="backend-url" type="text" value="http://localhost:5000" />
+        </label>
+      </div>
+
+      <div class="controls">
+        <label>对手:
+          <select id="opponent-select">
+            <option value="best_model">best_model</option>
+            <option value="edax">edax (fallback)</option>
+          </select>
+        </label>
+        <label>模拟次数:
+          <input id="sims" type="number" value="80" min="1" />
+        </label>
+        <button id="start-btn">开始新局</button>
+        <button id="pass-btn" style="display:none;">跳过（Pass）</button>
+        <div id="note" class="note"></div>
+      </div>
+
+      <div id="board" class="board"></div>
+      <div id="info" class="info"></div>
+    </div>
+
+    <script src="/static/app.js"></script>
+  </body>
+</html>
